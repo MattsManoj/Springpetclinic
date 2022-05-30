@@ -1,0 +1,22 @@
+pipeline {
+    agent { label 'build_java_11' }
+    triggers { pollSCM('0 * * * *') }
+    stages {
+        stage('SourceCode') {
+            steps {
+                git branch: 'master', url: 'https://github.com/MattsManoj/spring-framework-petclinic.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Archive and Test Results') {
+            steps {
+               junit '**/surefire-reports/*.xml'
+               archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+            }
+        }
+    }
+}
