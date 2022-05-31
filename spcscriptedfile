@@ -1,7 +1,7 @@
 node('build_java_11') {
     stage('SourceCode') {
         // get the code from git repo on the branch sprint1_develop
-        git branch: 'sprint1_develop', url: 'https://github.com/KhajasCICDSamples/game-of-life.git'
+        git branch: 'master', url: 'https://github.com/MattsManoj/spring-framework-petclinic.git'
     }
 
     stage('Build the code') {
